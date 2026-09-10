@@ -1,7 +1,10 @@
 #include <iostream>
 
-int main() {
-    std::cout << "Hello World!" << std::endl;
+#include "impl/console.h"
 
+int main() {
+    console cons;
+    cons.run();
     return 0;
 }
+

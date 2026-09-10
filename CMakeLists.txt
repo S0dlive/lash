@@ -3,4 +3,9 @@ project(lash)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(lash main.cpp)
+add_executable(lash main.cpp
+        impl/console.cpp
+        impl/console.h
+        impl/prompt.cpp
+        impl/prompt.h
+)
