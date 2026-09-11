@@ -5,16 +5,19 @@
 #ifndef LASH_CONSOLE_H
 #define LASH_CONSOLE_H
 #include <string>
+#include "commandmanager.h"
 
 
-    class console {
-    private:
-        bool m_running{true};
-        void processInput(const std::string& input);
+class console {
+private:
+    bool m_running{true};
+    commandmanager m_commandManager;
 
-    public:
-        console() = default;
-        void run();
-    };
+    void processInput(const std::string& line);
+
+public:
+    console() = default;
+    void run();
+};
 
 #endif //LASH_CONSOLE_H

@@ -8,22 +8,11 @@
 #include <cstdlib>
 
 std::string prompt::getHost() {
-
-#ifdef __linux__
     char hostname[HOST_NAME_MAX] ;
     if (gethostname(hostname, HOST_NAME_MAX) == 0) {
         return std::string(hostname);
     }
     return "localhost";
-#endif
-#ifdef __APPLE__
-    char hostanme [256];
-    if (gethostname(hostanme, sizeof(hostanme)) == 0) {
-        return std::string(hostanme);
-    }
-    return "localhost";
-#endif
-
 }
 
 std::string prompt::getUser() {
@@ -36,5 +25,9 @@ std::string prompt::getPrompt() {
          + "\033[1;34m" + getCwd() + "\033[0m$ ";
 }
 std::string prompt::getCwd() {
-    return std::filesystem::current_path().string();
+    char cwd[PATH_MAX];
+    if (getcwd(cwd, sizeof(cwd)) != nullptr) {
+        return std::string(cwd);
+    }
+    return "?";
 }

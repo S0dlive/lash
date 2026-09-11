@@ -4,13 +4,13 @@
 
 #include "console.h"
 #include "prompt.h"
-
+#include "cd_command.h"
 #include <iostream>
 #include <ostream>
 
 void console::run() {
     std::string line;
-
+    m_commandManager.register_command(std::make_unique<cd_command>());
     while (m_running) {
         std::cout << prompt::getPrompt() << std::flush;
         if (!std::getline(std::cin, line)) {
@@ -23,12 +23,11 @@ void console::run() {
     }
 }
 
-
 void console::processInput(const std::string& line) {
     if (line == "exit") {
-        std::filesystem::current_path().clear();
-        std::filesystem::current_path("/tmp");
+        m_running = false;
         return;
     }
-    std::cout << "[Reçu] " << line << "\n";
+
+    m_commandManager.run_command(line);
 }
