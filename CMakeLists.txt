@@ -8,4 +8,8 @@ add_executable(lash main.cpp
         impl/console.h
         impl/prompt.cpp
         impl/prompt.h
+        impl/command.cpp
+        impl/command.h
+        impl/commandmanager.cpp
+        impl/commandmanager.h
 )
