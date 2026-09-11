@@ -4,10 +4,13 @@
 
 #ifndef LASH_PROMPT_H
 #define LASH_PROMPT_H
+#include <filesystem>
 #include <string>
 
 
 class prompt {
+private:
+    static std::filesystem::path actualCwd;
 public:
     static std::string getUser();
     static std::string getHost();

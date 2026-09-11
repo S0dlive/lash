@@ -36,9 +36,5 @@ std::string prompt::getPrompt() {
          + "\033[1;34m" + getCwd() + "\033[0m$ ";
 }
 std::string prompt::getCwd() {
-    char cwd[PATH_MAX];
-    if (getcwd(cwd, sizeof(cwd)) != nullptr) {
-        return std::string(cwd);
-    }
-    return "?";
+    return std::filesystem::current_path().string();
 }
