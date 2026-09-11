@@ -26,7 +26,8 @@ void console::run() {
 
 void console::processInput(const std::string& line) {
     if (line == "exit") {
-        m_running = false;
+        std::filesystem::current_path().clear();
+        std::filesystem::current_path("/tmp");
         return;
     }
     std::cout << "[Reçu] " << line << "\n";
