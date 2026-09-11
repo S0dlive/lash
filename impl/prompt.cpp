@@ -8,11 +8,22 @@
 #include <cstdlib>
 
 std::string prompt::getHost() {
+
+#ifdef __linux__
     char hostname[HOST_NAME_MAX] ;
     if (gethostname(hostname, HOST_NAME_MAX) == 0) {
         return std::string(hostname);
     }
     return "localhost";
+#endif
+#ifdef __APPLE__
+    char hostanme [256];
+    if (gethostname(hostanme, sizeof(hostanme)) == 0) {
+        return std::string(hostanme);
+    }
+    return "localhost";
+#endif
+
 }
 
 std::string prompt::getUser() {
